@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { connect } from 'react-redux';
 import './App.css';
 
-class App extends Component {
+class App extends Component { 
+  
+
+increment = () => {
+this.props.dispatch({type:'INC'})
+}
+
+decrement = () => {
+ this.props.dispatch({type:'DEC'})
+}
+
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+       <p>Counter</p><br></br>
+       <button onClick={this.increment}>+</button>
+       <span>{this.props.count}</span>
+       <button onClick={this.decrement}>-</button>
       </div>
     );
   }
 }
-
-export default App;
+const mapStateToProps=(state)=>({
+   count:state.count
+});
+export default connect(mapStateToProps)(App);
